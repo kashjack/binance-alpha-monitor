@@ -294,7 +294,7 @@
     "points": "252",
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   },
   "BASED_2026-03-30_P1": {
     "token": "BASED",
