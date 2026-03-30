@@ -290,9 +290,9 @@
     "name": "R2 Protocol",
     "date": "2026-03-30",
     "time": "18:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "750",
+    "points": "252",
+    "type": "grab",
     "phase": 1,
     "completed": false
   },
@@ -301,10 +301,10 @@
     "name": "Based",
     "date": "2026-03-30",
     "time": "16:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "320",
+    "points": 241,
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
