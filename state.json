@@ -309,13 +309,13 @@
   },
   "EDGE_2026-03-31_P1": {
     "token": "EDGE",
-    "name": "EDGE",
+    "name": "edgeX",
     "date": "2026-03-31",
     "time": "20:30",
     "amount": "66",
     "points": 242,
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
