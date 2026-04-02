@@ -317,5 +317,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "CHECK_2026-04-02_P1": {
+    "token": "CHECK",
+    "name": "Checkmate",
+    "date": "2026-04-02",
+    "time": "16:00",
+    "amount": "500",
+    "points": "242",
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
