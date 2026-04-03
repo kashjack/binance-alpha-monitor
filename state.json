@@ -328,5 +328,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "ST_2026-04-07_P1": {
+    "token": "ST",
+    "name": "sentio",
+    "date": "2026-04-07",
+    "time": "16:00",
+    "amount": "",
+    "points": "",
+    "type": "tge",
+    "phase": 1,
+    "completed": false
   }
 }
