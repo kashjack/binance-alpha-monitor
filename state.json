@@ -334,8 +334,8 @@
     "name": "Sentio",
     "date": "2026-04-07",
     "time": "16:00",
-    "amount": "",
-    "points": "243",
+    "amount": 1157.48,
+    "points": 243,
     "type": "tge",
     "phase": 1,
     "completed": false
