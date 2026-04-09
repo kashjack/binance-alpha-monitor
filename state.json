@@ -350,5 +350,16 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "SOON_2026-04-09_P1": {
+    "token": "SOON",
+    "name": "SOON",
+    "date": "2026-04-09",
+    "time": "17:00",
+    "amount": "280",
+    "points": "242",
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
