@@ -372,5 +372,38 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "AOP_2026-04-10_P1": {
+    "token": "AOP",
+    "name": "Alpha Box",
+    "date": "2026-04-10",
+    "time": "17:00",
+    "amount": "715",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "CLO_2026-04-10_P1": {
+    "token": "CLO",
+    "name": "Alpha Box",
+    "date": "2026-04-10",
+    "time": "17:00",
+    "amount": "335",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "REKT_2026-04-10_P1": {
+    "token": "REKT",
+    "name": "Alpha Box",
+    "date": "2026-04-10",
+    "time": "17:00",
+    "amount": "192307700",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
