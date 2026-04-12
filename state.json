@@ -405,5 +405,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "GENIUS_2026-04-13_P1": {
+    "token": "GENIUS",
+    "name": "Genius Foundation",
+    "date": "2026-04-13",
+    "time": "",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
