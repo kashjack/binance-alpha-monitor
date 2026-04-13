@@ -410,9 +410,9 @@
     "token": "GENIUS",
     "name": "Genius Foundation",
     "date": "2026-04-13",
-    "time": "19:00",
+    "time": "22:00",
     "amount": "240",
-    "points": "230",
+    "points": 230,
     "type": "grab",
     "phase": 1,
     "completed": false
