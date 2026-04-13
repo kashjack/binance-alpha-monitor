@@ -408,13 +408,13 @@
   },
   "GENIUS_2026-04-13_P1": {
     "token": "GENIUS",
-    "name": "Genius Foundation",
+    "name": "Genius",
     "date": "2026-04-13",
-    "time": "Delay",
+    "time": "23:30",
     "amount": "240",
     "points": 230,
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
