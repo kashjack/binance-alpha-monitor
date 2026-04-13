@@ -411,9 +411,9 @@
     "name": "Genius Foundation",
     "date": "2026-04-13",
     "time": "19:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "240",
+    "points": "230",
+    "type": "grab",
     "phase": 1,
     "completed": false
   }
