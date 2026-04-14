@@ -416,5 +416,38 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "ANOME_2026-04-14_P1": {
+    "token": "ANOME",
+    "name": "ANOME",
+    "date": "2026-04-14",
+    "time": "17:00",
+    "amount": "824",
+    "points": 235,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "VELO_2026-04-14_P1": {
+    "token": "VELO",
+    "name": "VELO",
+    "date": "2026-04-14",
+    "time": "17:00",
+    "amount": "8750",
+    "points": 235,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "POWER_2026-04-14_P1": {
+    "token": "POWER",
+    "name": "POWER",
+    "date": "2026-04-14",
+    "time": "17:00",
+    "amount": "315",
+    "points": 235,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
