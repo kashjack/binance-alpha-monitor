@@ -466,32 +466,32 @@
     "name": "HANA",
     "date": "2026-04-17",
     "time": "17:00",
-    "amount": "800",
+    "amount": "700",
     "points": 242,
-    "type": "warning",
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   },
   "DAM_2026-04-17_P1": {
     "token": "DAM",
     "name": "DAM",
     "date": "2026-04-17",
     "time": "17:00",
-    "amount": "800",
+    "amount": "700",
     "points": 242,
-    "type": "warning",
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   },
   "AGT_2026-04-17_P1": {
     "token": "AGT",
     "name": "AGT",
     "date": "2026-04-17",
     "time": "17:00",
-    "amount": "2500",
+    "amount": "2800",
     "points": 242,
-    "type": "warning",
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
