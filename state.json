@@ -460,5 +460,38 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "HANA_2026-04-17_P1": {
+    "token": "HANA",
+    "name": "HANA",
+    "date": "2026-04-17",
+    "time": "17:00",
+    "amount": "800",
+    "points": 242,
+    "type": "warning",
+    "phase": 1,
+    "completed": false
+  },
+  "DAM_2026-04-17_P1": {
+    "token": "DAM",
+    "name": "DAM",
+    "date": "2026-04-17",
+    "time": "17:00",
+    "amount": "800",
+    "points": 242,
+    "type": "warning",
+    "phase": 1,
+    "completed": false
+  },
+  "AGT_2026-04-17_P1": {
+    "token": "AGT",
+    "name": "AGT",
+    "date": "2026-04-17",
+    "time": "17:00",
+    "amount": "2500",
+    "points": 242,
+    "type": "warning",
+    "phase": 1,
+    "completed": false
   }
 }
