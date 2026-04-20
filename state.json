@@ -493,5 +493,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "OPG_2026-04-21_P1": {
+    "token": "OPG",
+    "name": "opengradient",
+    "date": "2026-04-21",
+    "time": "17:00",
+    "amount": "",
+    "points": "",
+    "type": "tge",
+    "phase": 1,
+    "completed": false
   }
 }
