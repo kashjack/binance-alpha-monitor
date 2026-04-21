@@ -496,12 +496,34 @@
   },
   "OPG_2026-04-21_P1": {
     "token": "OPG",
-    "name": "opengradient",
+    "name": "OpenGradient",
     "date": "2026-04-21",
     "time": "17:00",
-    "amount": 270.74,
+    "amount": 254.56,
     "points": "226",
     "type": "tge",
+    "phase": 1,
+    "completed": false
+  },
+  "CHIP_2026-04-21_P1": {
+    "token": "CHIP",
+    "name": "USDAI",
+    "date": "2026-04-21",
+    "time": "20:20",
+    "amount": "750",
+    "points": "230",
+    "type": "grab",
+    "phase": 1,
+    "completed": false
+  },
+  "USDAI_2026-04-21_P1": {
+    "token": "USDAI",
+    "name": "CHIP",
+    "date": "2026-04-21",
+    "time": "",
+    "amount": "",
+    "points": "",
+    "type": "",
     "phase": 1,
     "completed": false
   }
