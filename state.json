@@ -499,22 +499,22 @@
     "name": "OpenGradient",
     "date": "2026-04-21",
     "time": "17:00",
-    "amount": 254.56,
-    "points": "226",
+    "amount": "254",
+    "points": 226,
     "type": "tge",
     "phase": 1,
     "completed": false
   },
   "CHIP_2026-04-21_P1": {
     "token": "CHIP",
-    "name": "USDAI",
+    "name": "USD.AI",
     "date": "2026-04-21",
     "time": "20:20",
     "amount": "750",
     "points": "230",
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   },
   "USDAI_2026-04-21_P1": {
     "token": "USDAI",
