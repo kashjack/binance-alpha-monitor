@@ -544,9 +544,31 @@
     "date": "2026-04-24",
     "time": "17:00",
     "amount": "46",
-    "points": "228",
-    "type": "warning",
+    "points": 228,
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
+  },
+  "ROLL_2026-04-24_P1": {
+    "token": "ROLL",
+    "name": "ROLL",
+    "date": "2026-04-24",
+    "time": "17:00",
+    "amount": "466",
+    "points": 228,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "RION_2026-04-24_P1": {
+    "token": "RION",
+    "name": "RION",
+    "date": "2026-04-24",
+    "time": "17:00",
+    "amount": "93",
+    "points": 228,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
