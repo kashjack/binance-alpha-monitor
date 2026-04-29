@@ -575,10 +575,10 @@
     "token": "AIGENSYN",
     "name": "Gensyn",
     "date": "2026-04-29",
-    "time": "",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "time": "17:00",
+    "amount": "715",
+    "points": 227,
+    "type": "grab",
     "phase": 1,
     "completed": false
   }
