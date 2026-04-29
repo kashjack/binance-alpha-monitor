@@ -580,6 +580,6 @@
     "points": 227,
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
