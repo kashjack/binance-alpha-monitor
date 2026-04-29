@@ -570,5 +570,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "AIGENSYN_2026-04-29_P1": {
+    "token": "AIGENSYN",
+    "name": "Gensyn",
+    "date": "2026-04-29",
+    "time": "",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
