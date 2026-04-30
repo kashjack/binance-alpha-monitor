@@ -581,5 +581,38 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "TAC_2026-04-30_P1": {
+    "token": "TAC",
+    "name": "TAC",
+    "date": "2026-04-30",
+    "time": "18:00",
+    "amount": "1870",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "RECALL_2026-04-30_P1": {
+    "token": "RECALL",
+    "name": "RECALL",
+    "date": "2026-04-30",
+    "time": "18:00",
+    "amount": "575",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
+  },
+  "CARV_2026-04-30_P1": {
+    "token": "CARV",
+    "name": "CARV",
+    "date": "2026-04-30",
+    "time": "18:00",
+    "amount": "510",
+    "points": 240,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
