@@ -625,5 +625,16 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "UAI_2026-05-01_P1": {
+    "token": "UAI",
+    "name": "UAI",
+    "date": "2026-05-01",
+    "time": "15:00",
+    "amount": "95",
+    "points": "237",
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
