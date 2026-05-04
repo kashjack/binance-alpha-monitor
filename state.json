@@ -642,10 +642,10 @@
     "name": "Billions Network",
     "date": "2026-05-04",
     "time": "15:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "2000",
+    "points": "220",
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
