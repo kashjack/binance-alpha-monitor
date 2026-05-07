@@ -658,5 +658,16 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "PLAY_2026-05-07_P1": {
+    "token": "PLAY",
+    "name": "PlaysOut",
+    "date": "2026-05-07",
+    "time": "18:00",
+    "amount": "360",
+    "points": 245,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
