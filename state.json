@@ -669,5 +669,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "SHARE_2026-05-08_P1": {
+    "token": "SHARE",
+    "name": "ShareX",
+    "date": "2026-05-08",
+    "time": "",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
