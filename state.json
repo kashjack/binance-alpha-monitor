@@ -672,13 +672,13 @@
   },
   "SHARE_2026-05-08_P1": {
     "token": "SHARE",
-    "name": "ShareX",
+    "name": "ShareX Token",
     "date": "2026-05-08",
     "time": "18:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "40",
+    "points": "230",
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
