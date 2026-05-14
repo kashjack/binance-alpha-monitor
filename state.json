@@ -691,5 +691,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "PHAROS_2026-05-13_P1": {
+    "token": "PHAROS",
+    "name": "Pharos",
+    "date": "2026-05-13",
+    "time": "23:00",
+    "amount": "45",
+    "points": 200,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
