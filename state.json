@@ -713,5 +713,16 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "B2_2026-05-14_P1": {
+    "token": "B2",
+    "name": "B2",
+    "date": "2026-05-14",
+    "time": "17:00",
+    "amount": "50",
+    "points": 225,
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
