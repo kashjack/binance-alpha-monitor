@@ -37,15 +37,15 @@ jobs:
 
           body = f"""这是一封 GitHub Actions 测试邮件。
 
-如果你收到这封邮件，说明：
-1. GitHub Secrets 配置正确
-2. QQ 邮箱 SMTP 授权码可用
-3. GitHub Actions 可以正常发邮件到你的邮箱
-
-发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
-
-注意：这只测试邮件发送链路，不测试 Binance Alpha / Alpha123 数据源。
-"""
+            如果你收到这封邮件，说明：
+            1. GitHub Secrets 配置正确
+            2. QQ 邮箱 SMTP 授权码可用
+            3. GitHub Actions 可以正常发邮件到你的邮箱
+            
+            发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
+            
+            注意：这只测试邮件发送链路，不测试 Binance Alpha / Alpha123 数据源。
+            """
 
           msg = MIMEText(body, "plain", "utf-8")
           msg["Subject"] = Header("GitHub Actions 邮件测试成功", "utf-8")
