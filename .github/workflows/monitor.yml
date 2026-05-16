@@ -2,7 +2,7 @@ name: Binance Alpha Email Monitor
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/13 * * * *'
   workflow_dispatch:
     inputs:
       init:
