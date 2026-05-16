@@ -1,0 +1,60 @@
+name: Test Email
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send test email
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          python <<'PY'
+          import os
+          import smtplib
+          from email.mime.text import MIMEText
+          from email.header import Header
+          from email.utils import formataddr
+          from datetime import datetime, timezone
+
+          smtp_host = os.environ.get("SMTP_HOST", "smtp.qq.com")
+          smtp_port = int(os.environ.get("SMTP_PORT", "465"))
+          smtp_user = os.environ["SMTP_USER"]
+          smtp_pass = os.environ["SMTP_PASS"]
+
+          recipients = [
+              x.strip()
+              for x in os.environ["MAIL_TO"].replace(";", ",").split(",")
+              if x.strip()
+          ]
+
+          body = f"""这是一封 GitHub Actions 测试邮件。
+
+如果你收到这封邮件，说明：
+1. GitHub Secrets 配置正确
+2. QQ 邮箱 SMTP 授权码可用
+3. GitHub Actions 可以正常发邮件到你的邮箱
+
+发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
+
+注意：这只测试邮件发送链路，不测试 Binance Alpha / Alpha123 数据源。
+"""
+
+          msg = MIMEText(body, "plain", "utf-8")
+          msg["Subject"] = Header("GitHub Actions 邮件测试成功", "utf-8")
+          msg["From"] = formataddr(("GitHub Actions Test", smtp_user))
+          msg["To"] = ", ".join(recipients)
+
+          with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
+              server.login(smtp_user, smtp_pass)
+              server.sendmail(smtp_user, recipients, msg.as_string())
+
+          print(f"Test email sent to: {', '.join(recipients)}")
+          PY
