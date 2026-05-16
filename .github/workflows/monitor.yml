@@ -1,9 +1,14 @@
-name: Binance Alpha Airdrop Monitor
+name: Binance Alpha Email Monitor
 
 on:
   schedule:
     - cron: '*/10 * * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      init:
+        description: '首次初始化状态，不发邮件'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -11,6 +16,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,39 +27,90 @@ jobs:
       - name: Install dependencies
         run: pip install cloudscraper requests
 
-      - name: Run monitor
+      - name: Initialize state
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.init == 'true' }}
+        run: python monitor.py --init
+
+      - name: Run monitor and send email
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.init != 'true' }}
         env:
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
           set +e
           output=$(python monitor.py 2>&1)
           exit_code=$?
           echo "$output"
-          
+
           if [ $exit_code -ne 0 ]; then
             echo "::warning::Monitor script failed with exit code $exit_code"
             exit 0
           fi
-          
-          # Parse JSON lines and send to Telegram
-          echo "$output" | while IFS= read -r line; do
-            if echo "$line" | python -c "import json,sys; d=json.loads(sys.stdin.read()); print(d['text'])" > /tmp/msg.txt 2>/dev/null; then
-              msg=$(cat /tmp/msg.txt)
-              if [ -n "$msg" ]; then
-                curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
-                  --data-urlencode "chat_id=${TG_CHAT_ID}" \
-                  --data-urlencode "text=${msg}"
-                echo "Sent notification for: $(echo "$msg" | head -1)"
-              fi
-            fi
-          done
+
+          echo "$output" > output.txt
+
+          python <<'PY'
+          import json
+          import os
+          import smtplib
+          from email.mime.text import MIMEText
+          from email.header import Header
+          from email.utils import formataddr
+
+          messages = []
+
+          with open("output.txt", "r", encoding="utf-8") as f:
+              for line in f:
+                  line = line.strip()
+                  if not line:
+                      continue
+                  try:
+                      data = json.loads(line)
+                      text = data.get("text")
+                      if text:
+                          messages.append(text)
+                  except Exception:
+                      pass
+
+          if not messages:
+              print("No notification email needed")
+              raise SystemExit(0)
+
+          body = "\n\n----------------\n\n".join(messages)
+          subject = "Binance Alpha 空投提醒"
+
+          smtp_host = os.environ.get("SMTP_HOST", "smtp.qq.com")
+          smtp_port = int(os.environ.get("SMTP_PORT", "465"))
+          smtp_user = os.environ["SMTP_USER"]
+          smtp_pass = os.environ["SMTP_PASS"]
+
+          recipients = [
+              x.strip()
+              for x in os.environ["MAIL_TO"].replace(";", ",").split(",")
+              if x.strip()
+          ]
+
+          msg = MIMEText(body, "plain", "utf-8")
+          msg["Subject"] = Header(subject, "utf-8")
+          msg["From"] = formataddr(("Alpha Monitor", smtp_user))
+          msg["To"] = ", ".join(recipients)
+
+          with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
+              server.login(smtp_user, smtp_pass)
+              server.sendmail(smtp_user, recipients, msg.as_string())
+
+          print(f"Sent email to {len(recipients)} recipient(s)")
+          PY
 
       - name: Commit state changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add state.json
+
           if ! git diff --staged --quiet; then
             git commit -m "Update state [skip ci]"
             git push
