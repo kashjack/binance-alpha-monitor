@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Send test email
         env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
@@ -22,25 +24,33 @@ jobs:
           from email.utils import formataddr
           from datetime import datetime, timezone
 
-          smtp_host = "smtp.qq.com"
-          smtp_port = 465
-
+          smtp_host = os.environ.get("SMTP_HOST", "").strip()
+          smtp_port_raw = os.environ.get("SMTP_PORT", "").strip()
           smtp_user = os.environ.get("SMTP_USER", "").strip()
           smtp_pass = os.environ.get("SMTP_PASS", "").strip()
           mail_to = os.environ.get("MAIL_TO", "").strip()
 
-          print("SMTP host:", smtp_host)
-          print("SMTP port:", smtp_port)
+          print("SMTP_HOST exists:", bool(smtp_host))
+          print("SMTP_PORT exists:", bool(smtp_port_raw))
           print("SMTP_USER exists:", bool(smtp_user))
           print("SMTP_PASS exists:", bool(smtp_pass))
           print("MAIL_TO exists:", bool(mail_to))
 
+          if not smtp_host:
+              raise SystemExit("Missing secret: SMTP_HOST")
+          if not smtp_port_raw:
+              raise SystemExit("Missing secret: SMTP_PORT")
           if not smtp_user:
               raise SystemExit("Missing secret: SMTP_USER")
           if not smtp_pass:
               raise SystemExit("Missing secret: SMTP_PASS")
           if not mail_to:
               raise SystemExit("Missing secret: MAIL_TO")
+
+          try:
+              smtp_port = int(smtp_port_raw)
+          except ValueError:
+              raise SystemExit(f"SMTP_PORT must be a number, got: {smtp_port_raw!r}")
 
           recipients = [
               x.strip()
@@ -51,13 +61,20 @@ jobs:
           if not recipients:
               raise SystemExit("MAIL_TO is empty")
 
+          print("SMTP host:", smtp_host)
+          print("SMTP port:", smtp_port)
           print("Recipients:", ", ".join(recipients))
 
           body = f"""这是一封 GitHub Actions 测试邮件。
 
-          如果你收到这封邮件，说明 GitHub Actions 邮件发送链路正常。
+          如果你收到这封邮件，说明：
+          1. GitHub Repository Secrets 配置正确
+          2. QQ 邮箱 SMTP 授权码可用
+          3. GitHub Actions 可以正常发邮件到你的邮箱
           
           发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
+          
+          注意：这只测试邮件发送链路，不测试 Binance Alpha / Alpha123 数据源。
           """
 
           msg = MIMEText(body, "plain", "utf-8")
