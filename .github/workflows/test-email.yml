@@ -55,10 +55,10 @@ jobs:
 
           body = f"""这是一封 GitHub Actions 测试邮件。
 
-如果你收到这封邮件，说明 GitHub Actions 邮件发送链路正常。
-
-发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
-"""
+          如果你收到这封邮件，说明 GitHub Actions 邮件发送链路正常。
+          
+          发送时间 UTC：{datetime.now(timezone.utc).isoformat()}
+          """
 
           msg = MIMEText(body, "plain", "utf-8")
           msg["Subject"] = Header("GitHub Actions 邮件测试成功", "utf-8")
