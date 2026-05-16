@@ -25,7 +25,7 @@ jobs:
           from datetime import datetime, timezone
 
           smtp_host = os.environ.get("SMTP_HOST", "smtp.qq.com")
-          smtp_port = int(os.environ.get("SMTP_PORT", "465"))
+          smtp_port = int(os.environ.get("SMTP_PORT") or "465")
           smtp_user = os.environ["SMTP_USER"]
           smtp_pass = os.environ["SMTP_PASS"]
 
