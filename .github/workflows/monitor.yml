@@ -9,6 +9,10 @@ on:
         description: '首次初始化状态，不发邮件'
         required: false
         default: 'false'
+      test_email:
+        description: '只测试邮件，不检查 Alpha123'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
