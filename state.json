@@ -3,10 +3,10 @@
     "token": "ZEST",
     "name": "Zest Protocol",
     "date": "2026-05-19",
-    "time": "",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "time": "21:00",
+    "amount": "800",
+    "points": "240",
+    "type": "grab",
     "phase": 1,
     "completed": false
   }
