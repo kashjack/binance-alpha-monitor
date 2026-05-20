@@ -14,9 +14,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: binance-alpha-monitor
+  cancel-in-progress: false
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - uses: actions/checkout@v6
@@ -47,8 +52,8 @@ jobs:
           echo "$output"
 
           if [ $exit_code -ne 0 ]; then
-            echo "::warning::Monitor script failed with exit code $exit_code"
-            exit 0
+            echo "::error::Monitor script failed with exit code $exit_code"
+            exit $exit_code
           fi
 
           echo "$output" > output.txt
@@ -133,6 +138,7 @@ jobs:
 
             if ! git diff --staged --quiet; then
               git commit -m "Update state [skip ci]"
+              git pull --rebase
               git push
             else
               echo "No state changes to commit"
