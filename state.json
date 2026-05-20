@@ -15,9 +15,9 @@
     "name": "Nexus",
     "date": "2026-05-20",
     "time": "22:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "20000250",
+    "points": "210",
+    "type": "grab",
     "phase": 1,
     "completed": false
   }
