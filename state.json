@@ -9,5 +9,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "NEX_2026-05-20_P1": {
+    "token": "NEX",
+    "name": "Nexus",
+    "date": "2026-05-20",
+    "time": "22:00",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
