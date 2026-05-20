@@ -3,7 +3,7 @@
 Binance Alpha Airdrop Monitor
 - 数据源: alpha123.uk
 - 检测新空投 + 信息变更
-- 输出 JSON 格式结果供 OpenClaw cron 读取推送
+- 输出 JSON 格式结果供 cron/GitHub Actions 读取推送
 """
 
 import json
@@ -12,10 +12,16 @@ import sys
 import time
 from datetime import datetime
 
-# Cloudflare bypass
+# Cloudflare / browser-like client
 try:
     import cloudscraper
-    scraper = cloudscraper.create_scraper()
+    scraper = cloudscraper.create_scraper(
+        browser={
+            "browser": "chrome",
+            "platform": "windows",
+            "mobile": False,
+        }
+    )
 except ImportError:
     print("ERROR: cloudscraper not installed. Run: pip3 install cloudscraper", file=sys.stderr)
     sys.exit(1)
@@ -23,7 +29,23 @@ except ImportError:
 # ── 配置 ──
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(SCRIPT_DIR, "state.json")
+BASE_URL = "https://alpha123.uk"
 API_URL = "https://alpha123.uk/api/data?fresh=1"
+
+REQUEST_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+    "Referer": "https://alpha123.uk/zh/",
+    "Origin": "https://alpha123.uk",
+    "DNT": "1",
+}
 
 # 监控字段
 MONITOR_FIELDS = ["name", "time", "amount", "points", "type", "completed"]
@@ -33,18 +55,110 @@ FIELD_NAMES = {
 }
 
 
+def _debug_response(label, resp):
+    """打印请求调试信息。"""
+    text = getattr(resp, "text", "") or ""
+    status_code = getattr(resp, "status_code", "?")
+    print(f"DEBUG: {label} HTTP {status_code}, length={len(text)}", file=sys.stderr)
+
+    if isinstance(status_code, int) and status_code >= 400:
+        snippet = text[:500].replace("\n", " ").replace("\r", " ")
+        print(f"DEBUG: {label} body snippet: {snippet}", file=sys.stderr)
+
+
+def _parse_airdrops(resp, label):
+    """解析接口返回。"""
+    _debug_response(label, resp)
+    resp.raise_for_status()
+    data = resp.json()
+
+    if not isinstance(data, dict):
+        raise RuntimeError(f"{label}: unexpected JSON type: {type(data).__name__}")
+
+    airdrops = data.get("airdrops", [])
+    if not isinstance(airdrops, list):
+        raise RuntimeError(f"{label}: unexpected airdrops type: {type(airdrops).__name__}")
+
+    print(f"DEBUG: {label} got {len(airdrops)} airdrops", file=sys.stderr)
+    return airdrops
+
+
+def _fetch_with_cloudscraper():
+    """优先用 cloudscraper，请求首页拿 cookie 后再请求 API。"""
+    for attempt in range(1, 4):
+        try:
+            try:
+                warm = scraper.get(
+                    f"{BASE_URL}/zh/",
+                    headers=REQUEST_HEADERS,
+                    timeout=30,
+                )
+                _debug_response(f"cloudscraper warmup attempt {attempt}", warm)
+            except Exception as e:
+                print(f"DEBUG: cloudscraper warmup failed: {e}", file=sys.stderr)
+
+            resp = scraper.get(
+                API_URL,
+                headers=REQUEST_HEADERS,
+                timeout=30,
+            )
+            return _parse_airdrops(resp, f"cloudscraper attempt {attempt}")
+        except Exception as e:
+            print(f"WARN: cloudscraper attempt {attempt} failed: {e}", file=sys.stderr)
+            if attempt < 3:
+                time.sleep(attempt * 2)
+
+    raise RuntimeError("cloudscraper failed after 3 attempts")
+
+
+def _fetch_with_curl_cffi():
+    """GitHub Actions 403 时，用 curl_cffi 模拟浏览器 TLS 指纹再试。"""
+    try:
+        from curl_cffi import requests as curl_requests
+    except ImportError as e:
+        raise RuntimeError("curl_cffi not installed") from e
+
+    last_error = None
+    for impersonate in ["chrome124", "chrome120", "chrome110"]:
+        try:
+            session = curl_requests.Session()
+            session.headers.update(REQUEST_HEADERS)
+
+            try:
+                warm = session.get(
+                    f"{BASE_URL}/zh/",
+                    timeout=30,
+                    impersonate=impersonate,
+                )
+                _debug_response(f"curl_cffi warmup {impersonate}", warm)
+            except Exception as e:
+                print(f"DEBUG: curl_cffi warmup failed: {e}", file=sys.stderr)
+
+            resp = session.get(
+                API_URL,
+                timeout=30,
+                impersonate=impersonate,
+            )
+            return _parse_airdrops(resp, f"curl_cffi {impersonate}")
+        except Exception as e:
+            last_error = e
+            print(f"WARN: curl_cffi {impersonate} failed: {e}", file=sys.stderr)
+            time.sleep(2)
+
+    raise RuntimeError(f"curl_cffi failed: {last_error}")
+
+
 def fetch_airdrops():
     """从 alpha123.uk 拉取空投数据"""
     try:
-        resp = scraper.get(API_URL, timeout=30)
-        print(f"DEBUG: HTTP {resp.status_code}, length={len(resp.text)}", file=sys.stderr)
-        resp.raise_for_status()
-        data = resp.json()
-        airdrops = data.get("airdrops", [])
-        print(f"DEBUG: got {len(airdrops)} airdrops", file=sys.stderr)
-        return airdrops
-    except Exception as e:
-        print(f"ERROR: 获取数据失败: {e}", file=sys.stderr)
+        return _fetch_with_cloudscraper()
+    except Exception as first_error:
+        print(f"WARN: primary fetch failed: {first_error}", file=sys.stderr)
+
+    try:
+        return _fetch_with_curl_cffi()
+    except Exception as second_error:
+        print(f"ERROR: 获取数据失败: {second_error}", file=sys.stderr)
         return None
 
 
