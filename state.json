@@ -31,5 +31,16 @@
     "type": "grab",
     "phase": 1,
     "completed": false
+  },
+  "GWEI_2026-05-21_P1": {
+    "token": "GWEI",
+    "name": "GWEI",
+    "date": "2026-05-21",
+    "time": "20:00",
+    "amount": "250",
+    "points": "230",
+    "type": "grab",
+    "phase": 1,
+    "completed": true
   }
 }
