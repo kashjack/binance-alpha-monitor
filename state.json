@@ -42,5 +42,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "SLX_2026-05-25_P1": {
+    "token": "SLX",
+    "name": "Solstice",
+    "date": "2026-05-25",
+    "time": "",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
