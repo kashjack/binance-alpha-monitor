@@ -58,11 +58,11 @@
     "token": "CTR",
     "name": "Citrea",
     "date": "2026-05-26",
-    "time": "",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "time": "21:00",
+    "amount": "1090",
+    "points": 211,
+    "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
