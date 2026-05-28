@@ -70,9 +70,9 @@
     "name": "Sealcoin",
     "date": "2026-05-28",
     "time": "21:00",
-    "amount": "",
-    "points": "",
-    "type": "",
+    "amount": "31111",
+    "points": "241",
+    "type": "grab",
     "phase": 1,
     "completed": false
   }
