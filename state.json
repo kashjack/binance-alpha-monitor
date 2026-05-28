@@ -64,5 +64,16 @@
     "type": "grab",
     "phase": 1,
     "completed": true
+  },
+  "QAIT_2026-05-28_P1": {
+    "token": "QAIT",
+    "name": "Sealcoin",
+    "date": "2026-05-28",
+    "time": "21:00",
+    "amount": "",
+    "points": "",
+    "type": "",
+    "phase": 1,
+    "completed": false
   }
 }
