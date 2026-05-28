@@ -69,11 +69,11 @@
     "token": "QAIT",
     "name": "Sealcoin",
     "date": "2026-05-28",
-    "time": "21:00",
+    "time": "23:00",
     "amount": "31111",
-    "points": "241",
+    "points": 241,
     "type": "grab",
     "phase": 1,
-    "completed": false
+    "completed": true
   }
 }
